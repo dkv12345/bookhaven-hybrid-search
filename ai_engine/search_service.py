@@ -26,7 +26,7 @@ class SearchService:
 
         print("[SearchService] Initializing ML Models...")
         # 1. Load SentenceTransformer for semantic embeddings
-        self.bi_encoder = SentenceTransformer("all-MiniLM-L6-v2")
+        self.bi_encoder = SentenceTransformer("intfloat/multilingual-e5-base")
         
         # 2. Load CrossEncoder for reranking
         self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
@@ -150,8 +150,8 @@ class SearchService:
                     }
                     self.books.append(metadata)
                     
-                    # Text representation to encode semantically
-                    semantic_text = f"Title: {title} | Author: {author} | Description: {description} | Genres: {genres_str}"
+                    # Text representation to encode semantically (E5-base requires 'passage: ' prefix)
+                    semantic_text = f"passage: Title: {title} | Author: {author} | Description: {description} | Genres: {genres_str}"
                     texts_to_embed.append(semantic_text)
                 
                 # Generate embeddings using Bi-Encoder
@@ -223,8 +223,8 @@ class SearchService:
             if bm25_scores[idx] > 0: # Only retrieve positive matches
                 bm25_results.append((self.books[idx]["id"], rank + 1))
 
-        # Stage 3: Semantic Vector Search (Get top 100 matching books)
-        query_embedding = self.bi_encoder.encode(query, convert_to_numpy=True)
+        # Stage 3: Semantic Vector Search (Get top 100 matching books - E5-base requires 'query: ' prefix)
+        query_embedding = self.bi_encoder.encode(f"query: {query}", convert_to_numpy=True)
         # Cosine similarity using dot product of normalized embeddings
         norm_embeddings = self.book_embeddings / np.linalg.norm(self.book_embeddings, axis=1, keepdims=True)
         norm_query = query_embedding / np.linalg.norm(query_embedding)
