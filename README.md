@@ -4,7 +4,7 @@ BookHaven is an enterprise-grade online bookstore built upon a **Unified Search 
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 BookHaven divides its operations across three decoupled execution layers:
 
@@ -37,9 +37,9 @@ BookHaven divides its operations across three decoupled execution layers:
 
 ---
 
-## 🧠 Core AI Modules & Detailed Workflows
+## Core AI Modules & Detailed Workflows
 
-### 🔍 1. Multi-Stage Hybrid Search Pipeline Workflow
+### 1. Multi-Stage Hybrid Search Pipeline Workflow
 Retrieves and ranks relevant catalog books in under 150ms using a cascading funnel:
 
 ```
@@ -80,7 +80,7 @@ Retrieves and ranks relevant catalog books in under 150ms using a cascading funn
 
 ---
 
-### 🎯 2. Context-Aware Hybrid Recommendation Workflow
+### 2. Context-Aware Hybrid Recommendation Workflow
 Calculates personalized carousels by fusing three recommendation metrics under a **Multi-Attribute Utility Theory (MAUT)** model:
 
 ```
@@ -132,7 +132,7 @@ Calculates personalized carousels by fusing three recommendation metrics under a
 
 ---
 
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```text
 bookhaven-root/
@@ -163,7 +163,7 @@ bookhaven-root/
 
 ---
 
-## ⚡ Getting Started & Setup
+## Getting Started & Setup
 
 ### Prerequisites
 * **Node.js**: v18.0.0 or higher
